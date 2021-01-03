@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">E-Health</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Appointments</string>
+    <string name="menu_slideshow">Tests</string>
+    <string name="menu_logout">Log-out</string>
+
+
+    <string name="menu_appointment">Appointments</string>
+    <string name="menu_test">Tests</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="type_of_doctors">
+        <item>Allergists/Immunologists</item>
+        <item>Anesthesiologists</item>
+        <item>Cardiologists</item>
+        <item>Colon and Rectal Surgeons </item>
+        <item>Dermatologists </item>
+        <item>Endocrinologists </item>
+        <item>Emergency Medicine Specialists </item>
+        <item>Gastroenterologists </item>
+        <item>Neurologists</item>
+        <item>Oncologists</item>
+        <item>Ophthalmologists</item>
+        <item>Nephrologists</item>
+        <item>Infectious Disease Specialists </item>
+        <item>Osteopaths</item>
+        <item>Otolaryngologists</item>
+        <item>Pathologists</item>
+        <item>Pediatricians</item>
+        <item>Physiatrists</item>
+        <item>Plastic Surgeons </item>
+        <item>Psychiatrists</item>
+        <item>Pulmonologists</item>
+        <item>Radiologists</item>
+        <item>Rheumatologists</item>
+        <item>Sleep edicine Specialists </item>
+        <item>Sports Medicine Specialists </item>
+        <item>General Surgeons </item>
+        <item>Urologists</item>
+        <item>Dentist</item>
+        <item>General Physician</item>
+        <item>Ayurveda</item>
+    </string-array>
+    <string name="title_activity_splash">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_doctor_dashboard">MainActivity</string>
+    <string name="title_home">New Appointments</string>
+    <string name="title_dashboard">Previous Appointments</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="type_of_test">
+        <item>blood analysis</item>
+        <item>gastric fluid analysis</item>
+        <item>kidney function test</item>
+        <item>liver function test</item>
+        <item>pregnancy test</item>
+        <item>protein-bound iodine test</item>
+        <item>angiocardiography</item>
+        <item>angiography</item>
+        <item>brain scanning</item>
+        <item>cholecystography</item>
+        <item>prenatal testing</item>
+        <item>ultrasound</item>
+        <item>electrocardiography</item>
+        <item>phonocardiography</item>
+        <item>semen analysis</item>
+        <item>autopsy</item>
+        <item>biopsy</item>
+    </string-array>
+</resources>
