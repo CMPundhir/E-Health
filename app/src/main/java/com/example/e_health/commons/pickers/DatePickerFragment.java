@@ -35,7 +35,7 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-        String str = String.format(Locale.ENGLISH, "%d/%d/%d",day,month+1,year);
+        String str = String.format(Locale.ENGLISH, "%02d/%02d/%d",day,month+1,year);
         listener.onDateSelected(str);
     }
 }

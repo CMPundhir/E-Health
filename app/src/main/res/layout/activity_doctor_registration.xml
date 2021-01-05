@@ -94,6 +94,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_insert_link_24"
+                android:layout_marginTop="8dp"
+                android:text="Attach your Medical Licence"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/bFile"
+                    android:drawableTint="@color/white"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:drawableLeft="@drawable/ic_baseline_insert_link_24"
+                    android:text="Attach Medical Licence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+                <ImageButton
+                    android:id="@+id/bDeleteFile"
+                    android:minHeight="10dp"
+                    android:minWidth="10dp"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:src="@drawable/ic_baseline_delete_forever_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"

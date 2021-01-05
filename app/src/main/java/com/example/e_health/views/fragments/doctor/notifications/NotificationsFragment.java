@@ -1,4 +1,4 @@
-package com.example.e_health.views.activities.ui.notifications;
+package com.example.e_health.views.fragments.doctor.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

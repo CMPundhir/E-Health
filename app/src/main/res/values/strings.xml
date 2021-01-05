@@ -15,6 +15,7 @@
 
     <string name="menu_appointment">Appointments</string>
     <string name="menu_test">Tests</string>
+    <string name="menu_doctors">Doctors</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -56,9 +57,11 @@
     <string name="title_activity_doctor_dashboard">MainActivity</string>
     <string name="title_home">New Appointments</string>
     <string name="title_dashboard">Previous Appointments</string>
+    <string name="title_profile">Profile</string>
     <string name="title_notifications">Notifications</string>
 
     <string-array name="type_of_test">
+        <item>Covid19 RTPCR Test</item>
         <item>blood analysis</item>
         <item>gastric fluid analysis</item>
         <item>kidney function test</item>
@@ -77,4 +80,6 @@
         <item>autopsy</item>
         <item>biopsy</item>
     </string-array>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_activity_admin_dashboard">AdminDashboardActivity</string>
 </resources>

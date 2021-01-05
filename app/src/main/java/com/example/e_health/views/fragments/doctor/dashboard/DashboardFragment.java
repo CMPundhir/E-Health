@@ -1,24 +1,19 @@
-package com.example.e_health.views.activities.ui.dashboard;
+package com.example.e_health.views.fragments.doctor.dashboard;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_health.commons.models.Appointment;
 import com.example.e_health.commons.utils.CommonDialogs;
 import com.example.e_health.commons.utils.Constants;
 import com.example.e_health.databinding.FragmentDashboardBinding;
 import com.example.e_health.views.adapters.AppointmentAdapter;
-import com.example.e_health.views.fragments.AppointmentBookFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -74,7 +69,6 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
     @Override

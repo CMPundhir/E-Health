@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EHealth">
+        <activity android:name=".views.activities.AdminNewActivity"
+            android:label="Admin"/>
+        <activity android:name=".views.activities.MedicalTreatmentActivity" />
+
         <activity
             android:name=".views.activities.DoctorDashboardActivity"
-            android:label="@string/title_activity_doctor_dashboard"></activity>
+            android:label="@string/title_activity_doctor_dashboard" />
         <activity android:name=".views.activities.DoctorRegistrationActivity" />
         <activity
             android:name=".views.activities.SplashActivity"

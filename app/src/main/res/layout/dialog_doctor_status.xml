@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:text="Take Action on Doctor Status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bApprove"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:drawableTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_playlist_add_check_24"
+        android:padding="16dp"
+        android:text="Approve"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bCancel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:drawableTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_cancel_24"
+        android:padding="16dp"
+        android:text="Cancel"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bPending"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:drawableTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_settings_24"
+        android:padding="16dp"
+        android:text="Approval Pending"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

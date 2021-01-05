@@ -18,6 +18,10 @@ import com.example.e_health.commons.utils.CommonDialogs;
 import com.example.e_health.commons.utils.Constants;
 import com.example.e_health.commons.utils.Prefs;
 import com.example.e_health.databinding.ActivitySplashBinding;
+import com.google.android.gms.auth.api.credentials.CredentialsApi;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "splash_";
     ActivitySplashBinding binding;
-
+    private static GoogleSignInClient mSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,12 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }else if (user.getType().equals(UserType.ADMIN)) {
+                    Intent intent = new Intent(SplashActivity.this, AdminNewActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             }else{
                 Log.d(TAG, "user not found");
@@ -88,6 +98,12 @@ public class SplashActivity extends AppCompatActivity {
                         Prefs.setUser(user);
                         if (user.getType().equals(UserType.DOCTOR)) {
                             Intent intent = new Intent(SplashActivity.this, DoctorDashboardActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        }else if (user.getType().equals(UserType.ADMIN)) {
+                            Intent intent = new Intent(SplashActivity.this, AdminNewActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();

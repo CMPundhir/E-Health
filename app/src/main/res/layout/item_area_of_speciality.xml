@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
-    app:cardPreventCornerOverlap="false"
+    app:cardElevation="1dp"
+    app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,10 +15,12 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tSno"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/tTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>

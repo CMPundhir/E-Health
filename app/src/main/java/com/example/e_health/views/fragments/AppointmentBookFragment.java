@@ -19,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.e_health.R;
+import com.example.e_health.commons.enums.AppointmentStatus;
+import com.example.e_health.commons.enums.UserStatus;
 import com.example.e_health.commons.listeners.DoctorSelectedListener;
 import com.example.e_health.commons.models.Appointment;
 import com.example.e_health.commons.models.User;
@@ -78,14 +80,14 @@ public class AppointmentBookFragment extends Fragment {
         //binding.sTypeOfDoctor.setAdapter(adapterTOD);
         //binding.sTypeOfDoctor.setThreshold(1);
 
-        SearchableSpinner searchableSpinner = new SearchableSpinner(context){
+        SearchableSpinner searchableSpinner = new SearchableSpinner(context) {
             @Override
             public void onSearchableItemClicked(Object item, int position) {
                 super.onSearchableItemClicked(item, position);
                 //Toast.makeText(context, "Clicked "+position, Toast.LENGTH_SHORT).show();
                 binding.sTypeOfDoctor.setText(item.toString());
                 binding.progressBarRl.setVisibility(VISIBLE);
-                FirebaseFirestore.getInstance().collection(Constants.COLLECTIONS.USERS).whereArrayContains(Constants.DocumentKeys.SPECIALISATIONS, item.toString()).get().addOnFailureListener(new OnFailureListener() {
+                FirebaseFirestore.getInstance().collection(Constants.COLLECTIONS.USERS).whereEqualTo(Constants.DocumentKeys.STATUS, UserStatus.ACTIVE.name()).whereArrayContains(Constants.DocumentKeys.SPECIALISATIONS, item.toString()).get().addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
                         CommonDialogs.myDialog(context, "Error!", e.getMessage());
@@ -95,10 +97,10 @@ public class AppointmentBookFragment extends Fragment {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         Log.d("doctors", queryDocumentSnapshots.toString());
-                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()){
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
                             doctorsList.add(documentSnapshot.toObject(User.class));
                         }
-                        Toast.makeText(context, "size : "+doctorsList.size(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "size : " + doctorsList.size(), Toast.LENGTH_SHORT).show();
                         binding.progressBarRl.setVisibility(GONE);
                     }
                 });
@@ -108,7 +110,7 @@ public class AppointmentBookFragment extends Fragment {
         binding.sTypeOfDoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchableSpinner.onTouch(v, MotionEvent.obtain(0,0,MotionEvent.ACTION_UP,0,0,0));
+                searchableSpinner.onTouch(v, MotionEvent.obtain(0, 0, MotionEvent.ACTION_UP, 0, 0, 0));
 
             }
         });
@@ -118,15 +120,24 @@ public class AppointmentBookFragment extends Fragment {
                 CommonDialogs.showDoctorsList(context, doctorsList, new DoctorSelectedListener() {
                     @Override
                     public void onDoctorSelected(User doctor) {
-                        binding.sDoctor.setText(String.format("Dr. %s", doctor.getName()));
+                        if(doctor.getName().toUpperCase().contains("DR.")){
+                            binding.sDoctor.setText(String.format("%s", doctor.getName()));
+                        }else {
+                            binding.sDoctor.setText(String.format("Dr. %s", doctor.getName()));
+                        }
                         selectedDoctor = doctor;
+                    }
+
+                    @Override
+                    public void onDoctorStatus(User doctor) {
+
                     }
                 });
             }
         });
 
         binding.eAppTime.setOnClickListener(v -> {
-            DialogFragment newFragment = new TimePickerFragment(time->{
+            DialogFragment newFragment = new TimePickerFragment(time -> {
                 binding.eAppTime.setText(time);
             });
             newFragment.show(getChildFragmentManager(), "timePicker");
@@ -140,7 +151,7 @@ public class AppointmentBookFragment extends Fragment {
             });
             newFragment.show(getChildFragmentManager(), "datePicker");
         });
-        binding.bBook.setOnClickListener(v->{
+        binding.bBook.setOnClickListener(v -> {
             String pName, pAge, docId, desc, date, time;
             date = binding.eAppDate.getText().toString();
             time = binding.eAppTime.getText().toString();
@@ -148,31 +159,31 @@ public class AppointmentBookFragment extends Fragment {
             pAge = binding.ePatientAge.getText().toString();
             docId = selectedDoctor.getId();
             desc = binding.eRemark.getText().toString();
-            if(TextUtils.isEmpty(pName)){
+            if (TextUtils.isEmpty(pName)) {
                 Toast.makeText(context, "Enter patient Name", Toast.LENGTH_SHORT).show();
                 binding.ePatientName.setError("Enter Patient Name");
                 return;
             }
-            if(TextUtils.isEmpty(date)){
+            if (TextUtils.isEmpty(date)) {
                 Toast.makeText(context, "Enter Patient date", Toast.LENGTH_SHORT).show();
                 binding.eAppDate.setError("Enter Patient date");
                 return;
             }
-            if(TextUtils.isEmpty(time)){
+            if (TextUtils.isEmpty(time)) {
                 Toast.makeText(context, "Enter Patient time", Toast.LENGTH_SHORT).show();
                 binding.eAppTime.setError("Enter Patient time");
                 return;
             }
-            if(TextUtils.isEmpty(pAge)){
+            if (TextUtils.isEmpty(pAge)) {
                 Toast.makeText(context, "Enter Patient Age", Toast.LENGTH_SHORT).show();
                 binding.ePatientAge.setError("Enter Patient Age");
                 return;
             }
-            if(selectedDoctor == null || TextUtils.isEmpty(binding.sDoctor.getText().toString())){
+            if (selectedDoctor == null || TextUtils.isEmpty(binding.sDoctor.getText().toString())) {
                 Toast.makeText(context, "Please select doctor", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(TextUtils.isEmpty(desc)){
+            if (TextUtils.isEmpty(desc)) {
                 Toast.makeText(context, "Enter patient problem description", Toast.LENGTH_SHORT).show();
                 binding.eRemark.setError("Enter Patient problem description");
                 return;
@@ -180,6 +191,7 @@ public class AppointmentBookFragment extends Fragment {
             binding.progressBar.setVisibility(View.VISIBLE);
             binding.bBook.setEnabled(false);
             Appointment appointment = new Appointment();
+            appointment.setStatus(AppointmentStatus.APPROVAL_PENDING.name());
             appointment.setPatientName(pName);
             appointment.setDate(date);
             appointment.setTime(time);
@@ -188,40 +200,49 @@ public class AppointmentBookFragment extends Fragment {
             appointment.setDoctorId(docId);
             appointment.setProblemDesc(desc);
             appointment.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            FirebaseFirestore.getInstance().collection(Constants.COLLECTIONS.USERS).document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection(Constants.COLLECTIONS.APPOINTMENTS).add(appointment).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    FirebaseFirestore.getInstance().collection(Constants.COLLECTIONS.USERS).document(docId).collection(Constants.COLLECTIONS.APPOINTMENTS).add(appointment).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            CommonDialogs.myDialog(context, "Success", "Appointment Booked Successfully", new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialog) {
-                                    startActivity(((Activity)context).getIntent());
-                                    ((Activity)context).finish();
-                                    ((Activity)context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            FirebaseFirestore.getInstance()
+                    .collection(Constants.COLLECTIONS.USERS)
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection(Constants.COLLECTIONS.APPOINTMENTS)
+                    .add(appointment)
+                    .addOnSuccessListener(documentReference ->
+                            {
+                                FirebaseFirestore.getInstance()
+                                        .collection(Constants.COLLECTIONS.APPOINTMENTS)
+                                        .document(documentReference.getId())
+                                        .set(appointment)
+                                        .addOnSuccessListener(v1->{
+
+                                        }).addOnFailureListener(e->{
+
+                                        });
+                                FirebaseFirestore.getInstance()
+                                        .collection(Constants.COLLECTIONS.USERS)
+                                        .document(docId)
+                                        .collection(Constants.COLLECTIONS.APPOINTMENTS)
+                                        .document(documentReference.getId())
+                                        .set(appointment)
+                                        .addOnSuccessListener(unused -> {
+                                            CommonDialogs.myDialog(context, "Success", "Appointment Booked Successfully", new DialogInterface.OnDismissListener() {
+                                                @Override
+                                                public void onDismiss(DialogInterface dialog) {
+                                                    startActivity(((Activity) context).getIntent());
+                                                    ((Activity) context).finish();
+                                                    ((Activity) context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                                    binding.progressBar.setVisibility(View.GONE);
+                                                    binding.bBook.setEnabled(true);
+                                                }
+                                            });
+                                        }).addOnFailureListener(e -> {
                                     binding.progressBar.setVisibility(View.GONE);
                                     binding.bBook.setEnabled(true);
-                                }
-                            });
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull @NotNull Exception e) {
-                            binding.progressBar.setVisibility(View.GONE);
-                            binding.bBook.setEnabled(true);
-                            CommonDialogs.myDialog(context,"Error!",e.getMessage());
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    binding.progressBar.setVisibility(View.GONE);
-                    binding.bBook.setEnabled(true);
-                    CommonDialogs.myDialog(context,"Error!",e.getMessage());
-                }
+                                    CommonDialogs.myDialog(context, "Error!", e.getMessage());
+                                });
+                            }
+                    ).addOnFailureListener(e -> {
+                binding.progressBar.setVisibility(View.GONE);
+                binding.bBook.setEnabled(true);
+                CommonDialogs.myDialog(context, "Error!", e.getMessage());
             });
         });
         return root;

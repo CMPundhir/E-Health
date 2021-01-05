@@ -6,17 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.e_health.MainActivity;
 import com.example.e_health.R;
+import com.example.e_health.commons.enums.UserStatus;
 import com.example.e_health.commons.models.User;
 import com.example.e_health.commons.utils.CommonDialogs;
 import com.example.e_health.commons.utils.Prefs;
 import com.example.e_health.databinding.ActivityDoctorDashboardBinding;
-import com.example.e_health.views.activities.ui.dashboard.DashboardFragment;
-import com.example.e_health.views.activities.ui.home.HomeFragment;
-import com.example.e_health.views.fragments.AppointmentBookFragment;
-import com.example.e_health.views.fragments.TestBookFragment;
-import com.example.e_health.views.fragments.ui.gallery.GalleryFragment;
+import com.example.e_health.views.fragments.ProfileFragment;
+import com.example.e_health.views.fragments.doctor.dashboard.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -51,7 +48,7 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard)
+                R.id.navigation_home, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_doctor_dashboard);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -65,9 +62,9 @@ public class DoctorDashboardActivity extends AppCompatActivity {
                     updateNavigationBarState(0);
                     setFragment(DashboardFragment.newInstance("0"));
                     //getSupportActionBar().setTitle("New Appointments");
-                }else if(id == R.id.navigation_dashboard){
+                }else if(id == R.id.navigation_profile){
                     updateNavigationBarState(1);
-                    setFragment(DashboardFragment.newInstance("1"));
+                    setFragment(ProfileFragment.newInstance());
                     //getSupportActionBar().setTitle("Previous Appointments");
                 }
                 return false;
@@ -75,6 +72,9 @@ public class DoctorDashboardActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        if(user.getStatus()==null || user.getStatus().equals(UserStatus.APPROVAL_PENDING.name())){
+            CommonDialogs.myDialog(this, "Your Profile Approval Pending", "Hello "+user.getName()+", \nWe are happy to work with you to provide better medical services to Patients. Currently Your profile is under Processing for Approval. We will revert you shortly on Profile Approval Status.\nThanks to Join E-Health.");
+        }
     }
 
     @Override

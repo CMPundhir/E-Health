@@ -20,11 +20,13 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Vi
     private Context context;
     private List<User> list;
     private DoctorSelectedListener listener;
+    private boolean isStatusVisible = false;
 
-    public DoctorListAdapter(Context context, List<User> list, DoctorSelectedListener listener) {
+    public DoctorListAdapter(Context context, List<User> list, DoctorSelectedListener listener, boolean isStatusVisible) {
         this.context = context;
         this.list = list;
         this.listener = listener;
+        this.isStatusVisible = isStatusVisible;
     }
 
     @NonNull
@@ -39,10 +41,10 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Vi
         User doctor = list.get(position);
         holder.binding.tTitle.setText(doctor.getName());
         holder.binding.tYOE.setText(String.format("Experience : %s years", doctor.getYoe()));
-    StringBuilder builder = new StringBuilder();
-    for(String s : doctor.getSpecialisations()){
-        builder.append(s).append(",");
-    }
+        StringBuilder builder = new StringBuilder();
+        for (String s : doctor.getSpecialisations()) {
+            builder.append(s).append(",");
+        }
         builder.replace(builder.lastIndexOf(","), builder.length(), "");
         holder.binding.tSpeciality.setText(builder.toString());
         holder.binding.tTitle.setText(doctor.getName());
@@ -50,6 +52,10 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Vi
         holder.binding.cardview.setOnClickListener(v->{
             listener.onDoctorSelected(doctor);
         });
+        holder.binding.bStatus.setOnClickListener(v->{
+            listener.onDoctorStatus(doctor);
+        });
+        holder.binding.tStatus.setText("Status : "+doctor.getStatus());
     }
 
     @Override
@@ -57,11 +63,15 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Vi
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ItemDoctorBinding binding;
         public ViewHolder(@NonNull @NotNull ItemDoctorBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            if(isStatusVisible){
+                binding.tStatus.setVisibility(View.VISIBLE);
+                binding.bStatus.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

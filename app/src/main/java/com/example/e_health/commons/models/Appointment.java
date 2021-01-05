@@ -1,10 +1,15 @@
 package com.example.e_health.commons.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.ServerTimestamp;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Parcelable {
     @DocumentId
     private String id;
     private String userId;
@@ -16,8 +21,40 @@ public class Appointment {
     private User doctor;
     private String problemDesc;
     private String status;
+    private Treatment treatment;
     @ServerTimestamp
     private Timestamp timestamp;
+
+    public Appointment(){
+
+    }
+
+
+    protected Appointment(Parcel in) {
+        id = in.readString();
+        userId = in.readString();
+        patientName = in.readString();
+        patientAge = in.readString();
+        date = in.readString();
+        time = in.readString();
+        doctorId = in.readString();
+        problemDesc = in.readString();
+        status = in.readString();
+        treatment = in.readParcelable(Treatment.class.getClassLoader());
+        timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+    }
+
+    public static final Creator<Appointment> CREATOR = new Creator<Appointment>() {
+        @Override
+        public Appointment createFromParcel(Parcel in) {
+            return new Appointment(in);
+        }
+
+        @Override
+        public Appointment[] newArray(int size) {
+            return new Appointment[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -99,11 +136,58 @@ public class Appointment {
         this.status = status;
     }
 
+    public Treatment getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(Treatment treatment) {
+        this.treatment = treatment;
+    }
+
     public Timestamp getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(userId);
+        dest.writeString(patientName);
+        dest.writeString(patientAge);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeString(doctorId);
+        dest.writeString(problemDesc);
+        dest.writeString(status);
+        dest.writeParcelable(treatment, flags);
+        dest.writeParcelable(timestamp, flags);
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", patientAge='" + patientAge + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", doctorId='" + doctorId + '\'' +
+                ", doctor=" + doctor +
+                ", problemDesc='" + problemDesc + '\'' +
+                ", status='" + status + '\'' +
+                ", treatment=" + treatment +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

@@ -4,4 +4,5 @@ import com.example.e_health.commons.models.User;
 
 public interface DoctorSelectedListener {
     void onDoctorSelected(User doctor);
+    void onDoctorStatus(User doctor);
 }

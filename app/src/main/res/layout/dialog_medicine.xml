@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="Medicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_marginStart="24dp"
+            android:text="Medicine Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/eName"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_medicine"
+            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:hint="Medicine Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:text="Timing of Intake"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/t1"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_access_time_16"
+                android:text="Morning"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/eQuantity"
+                android:layout_marginEnd="16dp"
+
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/t2"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_access_time_16"
+                android:text="After Noon"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/eQuantity2"
+                android:layout_marginEnd="16dp"
+
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/t3"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_access_time_16"
+                android:text="Evening"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/eQuantity3"
+                android:layout_marginEnd="16dp"
+
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/t4"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_access_time_16"
+                android:text="Before Bed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/eQuantity4"
+                android:layout_marginEnd="16dp"
+
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/checkbox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/t5"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_baseline_access_time_16"
+                android:text="One in a Day (any time)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/eQuantity5"
+                android:layout_marginEnd="16dp"
+
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:hint="Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <CheckBox
+                android:id="@+id/checkbox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_baseline_warning_24"
+            android:text="Precautions/Advice for medicine if any"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/ePrecautions"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:padding="8dp"
+            android:gravity="start|top"
+            android:hint="Please write precautions..."
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_rect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="5"/>
+
+        <Button
+            android:id="@+id/bDone"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="end"
+            android:text="Done"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</ScrollView>
